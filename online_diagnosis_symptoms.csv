@@ -1,0 +1,271 @@
+9,Headache
+10,Abdominal pain
+11,Fever
+12,Pain in the limbs
+13,Sore throat
+14,Runny nose
+15,Cough
+16,Tiredness
+17,Chest pain
+21,Itching of skin
+22,Weight loss
+23,Weight gain
+24,Blackhead
+25,Skin nodules
+26,Skin lesion
+27,Joint pain
+28,Stuffy nose
+29,Shortness of breath
+30,Wheezing
+31,Chest tightness
+33,Eye redness
+34,Skin wheal
+35,Lip swelling
+37,Palpitations
+38,Nosebleed
+39,Increased urine quantity
+40,Increased thirst
+43,Drowsiness
+44,Nausea
+45,Heartburn
+46,Burning in the throat
+47,Joylessness
+48,Bloated feeling in the stomach
+49,Cravings
+50,Diarrhea
+52,Sleeplessness
+53,Difficulty to concentrate
+54,Reduced appetite
+57,Blackening of vision
+59,Frequent urination
+60,Sensitivity to cold
+61,Skin redness
+62,Formation of blisters on a skin area
+63,Non-healing skin wound
+64,Sputum
+65,Irregular mole
+66,Visual field loss
+68,Vision impairment
+69,Sensitivity to glare
+70,Impaired light-dark adaptation
+71,Double vision
+72,Halo
+73,Itching eyes
+75,Burning eyes
+76,Feeling of foreign body in the eye
+77,Blurred vision
+78,Ringing in the ear
+79,Difficult defecation
+80,Hard defecation
+81,Incomplete defecation
+82,Less than 3 defecations per week
+83,Fatty defecation
+84,Foul smelling defecation
+85,Mood swings
+86,Feeling of pressure in the ear
+87,Earache
+88,Itching in the ear
+89,Cold feet
+90,Impaired hearing
+91,Changes in the nails
+92,Early satiety
+93,Difficulty in swallowing
+94,Cramps
+95,Sneezing
+96,Itching in the nose
+97,Mouth ulcers
+98,Difficulty in speaking
+101,Vomiting
+102,Sensitivity to noise
+103,Pain radiating to the leg
+104,Back pain
+105,Yellow colored skin
+106,Yellowish discoloration of the white part of the eye
+107,Burning sensation when urinating
+108,Dark urine
+109,Painful urination
+110,Genital warts
+112,Menstruation disorder
+113,Impairment of male potency
+114,Nervousness
+115,Tremor at rest
+116,Underweight
+118,Physical inactivity
+119,Muscle stiffness
+120,Impaired balance
+121,Hoarseness
+122,Hiccups
+123,Missed period
+124,Skin rash
+125,Forgetfulness
+126,Difficulty in finding words
+128,Disorientation regarding time or place
+129,Problems with the sense of touch in the face
+130,Problems with the sense of touch in the feet
+131,Increased appetite
+132,Tremor on movement
+133,Night cough
+134,Crusting
+135,Mouth pain
+136,Neck pain
+137,Oversensitivity to light
+138,Sweating
+139,Cold sweats
+140,Paralysis
+142,Pain in the calves
+143,Leg ulcer
+144,"Unconsciousness, short"
+145,Feeling of tension in the legs
+146,Leg cramps
+147,Ankle swelling
+148,Hand swelling
+149,Hot flushes
+150,Pallor
+151,Dry skin
+152,Hair loss
+153,"Fast, deepened breathing"
+154,Flatulence
+155,Pain in the bones
+156,Bone fracture
+157,Overweight
+160,Urge to urinate
+161,Urination during the night
+162,Dribbling after urination
+163,Decreased urine stream
+164,Feeling of residual urine
+165,Delayed start to urination
+166,Vision impairment for near objects
+167,Limited mobility of the back
+168,Muscular weakness in the arm
+169,Swollen glands in the neck
+170,Cheek swelling
+172,Purulent discharge from the urethra
+173,Purulent discharge from the vagina
+174,Lower abdominal pain
+175,Chills
+176,Bleeding in the conjunctiva of the eye
+177,Muscle pain
+178,Limited mobility of the fingers
+179,Stomach burning
+180,Black stools
+181,Vomiting blood
+183,Side pain
+184,Hardening of the skin
+185,Stress-related leg pain
+186,Hand pain
+187,Wound
+188,Abdominal guarding
+189,Painful defecation
+190,Blood in stool
+191,Rebound tenderness
+192,Bulging abdominal wall
+193,Joint swelling
+194,Joint effusion
+195,Limited mobility of the leg
+196,Hip pain
+197,Immobilization
+198,Joint instability
+200,Numbness of the hands
+201,Tingling
+202,Muscular atrophy of the arm
+203,Pain on swallowing
+204,Increased salivation
+205,Lockjaw
+206,Hearing loss
+207,Dizziness
+208,Eyelid swelling
+209,Eyelids sticking together
+210,Loss of eye lashes
+211,Tears
+213,Vision impairment for far objects
+214,Flaking skin
+215,Moist and softened skin
+216,Discoloration of nails
+217,Skin thickening
+218,Coarsening of the skin structure
+219,Face pain
+220,Increased touch sensitivity
+221,Numbness in the arm
+222,Testicular pain
+223,Abdominal pain associated with menstruation
+228,Cough with sputum
+230,Joint redness
+231,Leg swelling
+232,Marked veins
+233,Bloody cough
+234,Neck stiffness
+235,Memory gap
+236,Swelling in the genital area
+238,Anxiety
+239,Bold area among hair on the head
+240,Blue spot on skin
+241,Sleepiness with spontaneous falling asleep
+242,Eye blinking
+243,Tic
+244,Drooping eyelid
+245,Flaking skin on the head
+246,Facial paralysis
+247,Itching on head
+248,Swollen glands in the armpit
+249,Swollen glands in the groin
+250,Breathing-related pains
+251,Pain radiating to the arm
+252,Muscular atrophy in the leg
+253,Muscular weakness in the leg
+254,Numbness in the leg
+255,Foot pain
+256,Knee pain
+257,Involuntary movements
+258,Protrusion of the eyes
+260,Curvature of the spine
+261,Lump in the breast
+262,Increased drive
+263,Lower-back pain
+264,Shiny red tongue
+265,Uncontrolled defecation
+266,Malposition of the testicles
+267,Swelling of the testicles
+268,Itching or burning in the genital area
+269,Scalp redness
+270,"Double vision, acute-onset"
+272,Dry mouth
+273,Dry eyes
+284,Bleeding from vagina
+286,Pain when chewing
+287,Eye pain
+288,Burning nose
+970,Facial swelling
+971,Arm swelling
+972,Weakness or numbness on right or left side of body
+973,Itching in the mouth or throat
+974,Aggressiveness
+975,Sadness
+976,Hallucination
+977,Tongue swelling
+978,Cold hands
+979,Brittleness of nails
+980,Tongue burning
+981,Agitation
+982,Feeling faint
+983,Morning stiffness
+984,Absence of a pulse
+985,Heart murmur
+986,Irregular heartbeat
+987,Muscle weakness
+988,Trouble understanding speech
+989,Distended abdomen
+990,Pain of the anus
+991,Blue colored skin
+992,Limited mobility of the ankle
+993,Hip deformity
+994,Knee deformity
+995,Finger deformity
+996,Ankle deformity
+997,Toe deformity
+998,Back deformity
+999,Itching of the anus
+1000,Limited mobility of the hip
+1001,Scar
+1002,Foot swelling
+1003,Toe swelling
+1004,Night sweats

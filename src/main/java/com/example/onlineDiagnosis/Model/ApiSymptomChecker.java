@@ -5,6 +5,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.sun.istack.NotNull;
 import org.json.JSONArray;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ import java.io.IOException;
  *  8: getSpecialisationsList
  *
  */
+@Component
 public class ApiSymptomChecker {
     private static final String API_SYMPTOM_CHECKER_KEY = "d8455cfac5mshb2e12524fc60827p13bf2fjsna477236d177e";
     private static final String API_SYMPTOM_CHECKER_HOST = "priaid-symptom-checker-v1.p.rapidapi.com";
@@ -30,20 +32,14 @@ public class ApiSymptomChecker {
      * Get Body Location
      * @return String JsonArray
      */
-    public static String getBodyLocation(){
+    public static JSONArray getBodyLocation(){
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/body/locations?language=en-gb")
                 .get()
                 .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
                 .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }catch (IOException ioException){
-            ioException.printStackTrace();
-        }
-        return "";
+        return getResponse(request);
     }
 
     /**
@@ -53,7 +49,7 @@ public class ApiSymptomChecker {
      *                        Each element consists of the ID and Name.
      * @return Json String
      */
-    public static String getBodySubLocations(int idxBodyLocation){
+    public static JSONArray getBodySubLocations(int idxBodyLocation){
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/body/locations/"
                         +idxBodyLocation+
@@ -75,7 +71,7 @@ public class ApiSymptomChecker {
      *                    and 11 and below is considered as Child (for boy, girl)
      * @return String JsonArray
      */
-    public static String getSymptomsInBodySubLocations(int idxBodySubLocations,String gender){
+    public static JSONArray getSymptomsInBodySubLocations(int idxBodySubLocations,String gender){
         if (!gender.equals("man") &&
                 !gender.equals("woman") &&
                 !gender.equals("boy") &&
@@ -102,8 +98,11 @@ public class ApiSymptomChecker {
      *                    (JSON encoded int[] array)
      * @return
      */
-    public static String getSymptoms(int[] idSymptoms){
-        JSONArray jsonArray = new JSONArray(idSymptoms);
+    public static JSONArray getSymptoms(int[] idSymptoms){
+        JSONArray jsonArray = new JSONArray();
+        if (idSymptoms!=null){
+            jsonArray = new JSONArray(idSymptoms);
+        }
 
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms?language=en-gb&format=json&" +
@@ -123,7 +122,7 @@ public class ApiSymptomChecker {
      *                 example issues=[234,235,236]
      * @return  String Json
      */
-    public static String getIssues(int[] idIssues){
+    public static JSONArray getIssues(int[] idIssues){
         JSONArray jsonArray = new JSONArray(idIssues);
 
         Request request = new Request.Builder()
@@ -144,7 +143,7 @@ public class ApiSymptomChecker {
      * @param idIssue Number of the health issue
      * @return String Json Array
      */
-    public static String getIssueInfo(@NotNull int idIssue){
+    public static JSONArray getIssueInfo(@NotNull int idIssue){
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/issues/" +
                         idIssue +
@@ -166,7 +165,7 @@ public class ApiSymptomChecker {
      *                   Example: [234,235,236]
      * @return String JsonArray
      */
-    public static String getDiagnosis(@NotNull String gender,@NotNull int birthday,@NotNull int[] idSymptoms){
+    public static JSONArray getDiagnosis(@NotNull String gender,@NotNull int birthday,@NotNull int[] idSymptoms){
         JSONArray jsonArray = new JSONArray(idSymptoms);
         if (!gender.equals("male") &&
                 !gender.equals("female")){
@@ -194,7 +193,7 @@ public class ApiSymptomChecker {
      * @param idSymptoms Serialized array of selected symptom ids in json format. example symptoms=[234,235,236]
      * @return
      */
-    public static String getProposedDiagnosis(@NotNull String gender,@NotNull int birthday, int[] idSymptoms){
+    public static JSONArray getProposedDiagnosis(@NotNull String gender,@NotNull int birthday, int[] idSymptoms){
         JSONArray jsonArray = new JSONArray(idSymptoms);
         if (!gender.equals("male") &&
                 !gender.equals("female")){
@@ -223,7 +222,7 @@ public class ApiSymptomChecker {
      * @param birthday Year of birth
      * @return String JsonArray
      */
-    public static String getSpecialisationsBasedOnDiagnosis(@NotNull int[] idSymptoms,@NotNull String gender,@NotNull int birthday){
+    public static JSONArray getSpecialisationsBasedOnDiagnosis(@NotNull int[] idSymptoms,@NotNull String gender,@NotNull int birthday){
         JSONArray jsonArray = new JSONArray(idSymptoms);
         if (!gender.equals("male") &&
                 !gender.equals("female")){
@@ -247,7 +246,7 @@ public class ApiSymptomChecker {
      * Check out our specialisations, so you can make your own mapping.
      * @return String JsonArray
      */
-    public static String getSpecialisationsList(){
+    public static JSONArray getSpecialisationsList(){
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/specialisations?language=en-gb")
                 .get()
@@ -259,18 +258,18 @@ public class ApiSymptomChecker {
     }
 
 
-    private static String getResponse(Request request) {
+    private static JSONArray getResponse(Request request) {
         Response response;
         try {
             response = client.newCall(request).execute();
             if (response.isSuccessful()){
-                return response.body().string();
+                return new JSONArray(response.body().string());
             }else {
-                return "";
+                return null;
             }
         }catch (IOException ioException){
             ioException.printStackTrace();
-            return "";
+            return null;
         }
     }
 }
