@@ -23,10 +23,10 @@ import java.io.IOException;
  *
  */
 @Component
-public class ApiSymptomChecker {
-    private static final String API_SYMPTOM_CHECKER_KEY = "d8455cfac5mshb2e12524fc60827p13bf2fjsna477236d177e";
-    private static final String API_SYMPTOM_CHECKER_HOST = "priaid-symptom-checker-v1.p.rapidapi.com";
+public class ApiResponseSymptomChecker {
     private static final OkHttpClient client = new OkHttpClient();
+    public static final String API_SYMPTOM_CHECKER_KEY = "d8455cfac5mshb2e12524fc60827p13bf2fjsna477236d177e";
+    public static final String API_SYMPTOM_CHECKER_HOST = "priaid-symptom-checker-v1.p.rapidapi.com";
 
     /**
      * Get Body Location
@@ -257,8 +257,7 @@ public class ApiSymptomChecker {
         return getResponse(request);
     }
 
-
-    private static JSONArray getResponse(Request request) {
+    static JSONArray getResponse(Request request) {
         Response response;
         try {
             response = client.newCall(request).execute();

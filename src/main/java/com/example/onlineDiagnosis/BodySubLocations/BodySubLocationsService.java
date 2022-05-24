@@ -12,6 +12,10 @@ import java.util.List;
 public class BodySubLocationsService {
     private final BodySubLocationsRepository repository;
 
+    public BodySubLocations findById(int id) {
+        return repository.findById(id);
+    }
+
     public List<BodySubLocations> findAll(){
         return repository.findAll();
     }
