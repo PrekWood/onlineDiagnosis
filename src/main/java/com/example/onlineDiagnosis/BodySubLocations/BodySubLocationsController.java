@@ -18,11 +18,10 @@ import java.util.List;
 public class BodySubLocationsController {
     BodySubLocationsService bodySubLocationsService;
     @CrossOrigin
-    @GetMapping("/BodySubLocations{id}" )
+    @GetMapping("/api/body-parts/{id}" )
     public ResponseEntity<?> getBodySubLocations(@PathVariable int id) {
-        BodySubLocations bodyLocations = bodySubLocationsService.findById(id);
-        if (bodyLocations == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("id: "+id +" doesnt exists");
-        return ResponseEntity.status(HttpStatus.OK).body(bodyLocations);
+        JSONArray bodySubLocations = ApiResponseSymptomChecker.getBodySubLocations(id);
+        if (bodySubLocations == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(bodySubLocations);
     }
 }

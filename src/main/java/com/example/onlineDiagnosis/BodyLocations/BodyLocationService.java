@@ -16,4 +16,7 @@ public class BodyLocationService {
     public void save(BodyLocation b){
         repository.save(b);
     }
+    public BodyLocation findById(int id){
+        return repository.findById(id);
+    }
 }

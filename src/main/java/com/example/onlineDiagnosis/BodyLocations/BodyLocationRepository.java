@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BodyLocationRepository extends JpaRepository<BodyLocation,Long> { //CrudRepository<BodyLocation,Long>
-//    List<BodyLocationRepository> findAllByLocationsContains(String searchQuery, Sort s);
+    BodyLocation findById(int id);
 }
 

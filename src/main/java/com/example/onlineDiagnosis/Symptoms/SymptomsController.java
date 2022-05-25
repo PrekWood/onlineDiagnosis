@@ -18,10 +18,10 @@ import java.util.List;
 public class SymptomsController {
     SymptomsService symptomsService;
     @CrossOrigin
-    @GetMapping("/api/symptoms{id}" )
-    public ResponseEntity<?> saveSymptoms(@PathVariable int[] id){
-
-        List<Symptoms> symptoms = symptomsService.getSymptomsById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(symptoms);
+    @GetMapping("/api/symptoms?idPart={idPart}" )
+    public ResponseEntity<?> saveSymptoms(@PathVariable int[] idPart){
+        JSONArray response = ApiResponseSymptomChecker.getSymptoms(idPart);
+        if (response == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
