@@ -1,32 +1,32 @@
 [
   {
     "name": "Greece",
-    "iso-code": "el",
+    "iso_code": "el",
     "image": "gr.svg"
   },
   {
     "name": "English",
-    "iso-code": "en",
+    "iso_code": "en",
     "image": "gb.svg"
   },
   {
     "name": "Spanish",
-    "iso-code": "es",
+    "iso_code": "es",
     "image": "es.svg"
   },
   {
     "name": "German",
-    "iso-code": "de",
+    "iso_code": "de",
     "image": "de.svg"
   },
   {
     "name": "Chinese",
-    "iso-code": "zh-TW",
+    "iso_code": "zh-TW",
     "image": "cn.svg"
   },
   {
     "name": "Russian",
-    "iso-code": "ru",
+    "iso_code": "ru",
     "image": "ru.svg"
   }
 ]
