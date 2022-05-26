@@ -1,5 +1,6 @@
 package com.example.onlineDiagnosis.User;
 
+import com.example.onlineDiagnosis.Symptoms.Symptoms;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,6 +29,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private boolean isPhoneValidated;
+
+    @OneToMany
+    private List<Symptoms> symptomsList;
 
     public User(String email, String password, String phoneNumber, String firstName, String lastName, UserRole role, boolean isPhoneValidated) {
         this.email = email;

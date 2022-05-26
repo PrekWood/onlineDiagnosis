@@ -9,13 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
 @RestController
@@ -25,7 +18,7 @@ public class UserController extends ResponseHandler {
 
     private final UserService userService;
 
-    @PostMapping("registration/is-loged-in")
+    @PostMapping("user/is-loged-in")
     public ResponseEntity<?> isLoggedIn() {
         // Search for user
         User loggedInUser = userService.loadUserFromJwt();

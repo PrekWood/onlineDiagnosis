@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServer;
 
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,7 +18,5 @@ import javax.persistence.ManyToOne;
 public class Symptoms {
     @Id
     private int id;
-    @ManyToOne
-    private User user;
     private String name;
 }
