@@ -12,12 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class SymptomsService {
     private final SymptomsRepository repository;
-    public List<Symptoms> getSymptomsById(int[] id){
-        List<Symptoms> symptoms = new ArrayList<>();
-        for (int i:id){
-            symptoms.add(repository.findAllById(i));
-        }
-        return symptoms;
+    public Symptoms getSymptomById(long id){
+        return repository.getById(id);
     }
     public List<Symptoms> findAll(){
         return repository.findAll();

@@ -1,25 +1,25 @@
-21,Hair & scalp
-22,Forehead & head in general
-23,Face & eyes
-24,"Nose, ears, throat & neck"
-25,Mouth & jaw
-26,Upper arm & shoulder
-28,Forearm & elbow
-29,Hand & wrist
-30,Finger
-31,Chest
-32,Lateral chest
-33,Back
-36,Abdomen
-37,Pelvis
-38,Genitals & groin
-39,Hips & hip joint
-40,Buttocks & rectum
-41,Thigh & knee
-43,Lower leg & ankle
-44,Foot
-45,Toes
-46,Skin
-47,"General, joints & other"
-48,Arms general
-49,Legs general
+21,Hair & scalp,6
+22,Forehead & head in general,6
+23,Face & eyes,6
+24,"Nose, ears, throat & neck",6
+25,Mouth & jaw,6
+26,Upper arm & shoulder,7
+28,Forearm & elbow,7
+29,Hand & wrist,7
+30,Finger,7
+31,Chest,15
+32,Lateral chest,15
+33,Back,15
+36,Abdomen,16
+37,Pelvis,16
+38,Genitals & groin,16
+39,Hips & hip joint,16
+40,Buttocks & rectum,16
+41,Thigh & knee,10
+43,Lower leg & ankle,10
+44,Foot,10
+45,Toes,10
+46,Skin,17
+47,"General, joints & other",17
+48,Arms general,7
+49,Legs general,10

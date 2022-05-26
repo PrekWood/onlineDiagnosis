@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 @RestController
 @AllArgsConstructor
@@ -20,8 +21,8 @@ public class BodySubLocationsController {
     @CrossOrigin
     @GetMapping("/api/body-parts/{id}" )
     public ResponseEntity<?> getBodySubLocations(@PathVariable int id) {
-        JSONArray bodySubLocations = ApiResponseSymptomChecker.getBodySubLocations(id);
-        if (bodySubLocations == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        BodySubLocations bodySubLocations = bodySubLocationsService.findByBodyLocationId(id);
+        if (bodySubLocations == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Body Location id not Found"));
         return ResponseEntity.status(HttpStatus.OK).body(bodySubLocations);
     }
 }

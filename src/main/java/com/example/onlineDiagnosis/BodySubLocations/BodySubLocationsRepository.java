@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BodySubLocationsRepository extends JpaRepository<BodySubLocations,Long> {
-    BodySubLocations findById(int id);
+    BodySubLocations findByBodyLocationId(long id);
 }

@@ -1,27 +1,71 @@
 package com.example.onlineDiagnosis.Symptoms;
 
-import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
+import com.example.onlineDiagnosis.User.User;
+import com.example.onlineDiagnosis.User.UserService;
+import com.example.onlineDiagnosis.User.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
 public class SymptomsController {
     SymptomsService symptomsService;
+    private final UserService userService;
+
     @CrossOrigin
-    @GetMapping("/api/symptoms?idPart={idPart}" )
-    public ResponseEntity<?> saveSymptoms(@PathVariable int[] idPart){
-        JSONArray response = ApiResponseSymptomChecker.getSymptoms(idPart);
-        if (response == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    @PostMapping("/api/symptoms" )
+    public ResponseEntity<?> addSymptom(@RequestBody Symptoms givenSymptom){
+        User u = userService.loadUserFromJwt();
+        List<Symptoms> symptomsList = u.getSymptomsList();
+        if (givenSymptom.getId() == 0){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Id is 0"));
+        }
+        for (Symptoms s:symptomsList){
+            if (s.getId() == givenSymptom.getId()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Id is already in the list"));
+            }
+        }
+        symptomsList.add(symptomsService.getSymptomById(givenSymptom.getId()));
+        return saveUserSymptomsList(u, symptomsList);
     }
+    @CrossOrigin
+    @GetMapping("/api/symptoms" )
+    public ResponseEntity<?> getSymptoms(){
+        User u = userService.loadUserFromJwt();
+        List<Symptoms> symptoms = u.getSymptomsList();
+        if (symptoms.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>().put("Warning","Symptom list is empty"));
+        return ResponseEntity.status(HttpStatus.OK).body(symptoms);
+    }
+    @CrossOrigin
+    @DeleteMapping("/api/symptoms" )
+    public ResponseEntity<?> deleteSymptom(@RequestBody Symptoms symptoms){
+        User u = userService.loadUserFromJwt();
+        List<Symptoms> symptomsList = u.getSymptomsList();
+        for (Symptoms s:symptomsList){
+            if (s.getId() == symptoms.getId()) {
+                symptomsList.remove(s);
+                return saveUserSymptomsList(u, symptomsList);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","id not found in the list"));
+    }
+
+    @NotNull
+    private ResponseEntity<?> saveUserSymptomsList(User u, List<Symptoms> symptomsList) {
+        u.setSymptomsList(symptomsList);
+        try {
+            userService.updateUser(u);
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new HashMap<>().put("error", "User Not Found"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(symptomsList);
+    }
+
 }

@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class BodyLocation {
     @Id
-    private int id;
+    private long id;
     private String locations;
 
 }

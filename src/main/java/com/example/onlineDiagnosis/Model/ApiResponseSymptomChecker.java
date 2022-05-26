@@ -54,7 +54,7 @@ public class ApiResponseSymptomChecker {
      *                        Each element consists of the ID and Name.
      * @return Json String
      */
-    public static JSONArray getBodySubLocations(int idxBodyLocation) {
+    public static JSONArray getBodySubLocations(long idxBodyLocation) {
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/body/locations/"
                         + idxBodyLocation +
