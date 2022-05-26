@@ -33,7 +33,7 @@ public class ApiResponseTranslation{
     }
 
     public static String getTranslatedTextGoogleCloud(String targetLanguageCode,String text){
-        String googleCloudAPIKey = "AIzaSyAejT5O_dmD7f3jr-dlAMD72dFM_oQcnEk";
+        String googleCloudAPIKey = ""; //ρωτα τον νικο";
 
         /**
          * {
