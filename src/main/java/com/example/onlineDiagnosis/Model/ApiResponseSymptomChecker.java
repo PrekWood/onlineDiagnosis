@@ -276,7 +276,7 @@ public class ApiResponseSymptomChecker {
                 JSONObject issue = diagnosis.getJSONObject("Issue");
                 issue.put("Description",getIssueInfo(issue.getInt("ID")));
                 diagnosis.remove("Specialisation");
-                diagnosis.put("Specialisation",getSpecialisationsBasedOnDiagnosis(idSymptoms,gender,birthday));
+                diagnosis.put("doctors",getSpecialisationsBasedOnDiagnosis(idSymptoms,gender,birthday));
                 newResponse.put(diagnosis);
             }
         }catch (Exception e){
