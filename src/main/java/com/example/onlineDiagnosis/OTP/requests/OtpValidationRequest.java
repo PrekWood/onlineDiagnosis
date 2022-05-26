@@ -1,4 +1,4 @@
-package com.example.onlineDiagnosis.User.requests;
+package com.example.onlineDiagnosis.OTP.requests;
 
 import lombok.*;
 
