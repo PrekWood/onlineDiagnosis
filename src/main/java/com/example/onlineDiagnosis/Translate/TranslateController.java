@@ -40,11 +40,13 @@ public class TranslateController extends ResponseHandler {
         }
 
         try{
-            String translatedText = ApiResponseTranslation.getTranslatedText(
+//            String translatedText = ApiResponseTranslation.getTranslatedText(
+            String translatedText = ApiResponseTranslation.getTranslatedTextGoogleCloud(
                     translateRequest.getTl(),
-                    translateRequest.getText()).getJSONObject("data").getString("translation");
+                    translateRequest.getText());//.getJSONObject("data").getString("translation");
             return ResponseEntity.status(HttpStatus.OK).body(translatedText);
         }catch (Exception e){
+            System.out.println(e);
             return createErrorResponse("Something went wrong please try again");
         }
 

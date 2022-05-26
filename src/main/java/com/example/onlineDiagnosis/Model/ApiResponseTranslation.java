@@ -1,14 +1,15 @@
 package com.example.onlineDiagnosis.Model;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.okhttp.*;
 import com.sun.istack.NotNull;
+import okhttp3.MultipartBody;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @Component
 public class ApiResponseTranslation{
@@ -30,6 +31,47 @@ public class ApiResponseTranslation{
                 .build();
         return getResponse(request);
     }
+
+    public static String getTranslatedTextGoogleCloud(String targetLanguageCode,String text){
+        String googleCloudAPIKey = "AIzaSyAejT5O_dmD7f3jr-dlAMD72dFM_oQcnEk";
+
+        /**
+         * {
+         *   "q": "LOG OUT",
+         *   "source": "en",
+         *   "target": "es",
+         *   "format": "text"
+         * }
+         */
+        RequestBody requestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                "{" +
+                "'q': '"+text+"',"+
+                "'target': '"+targetLanguageCode+"',"+
+                "'format': 'text',"+
+                "}"
+        );
+
+        Request request = new Request.Builder()
+                .url("https://translation.googleapis.com/language/translate/v2?key="+googleCloudAPIKey)
+                .post(requestBody)
+                .build();
+
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            if (!response.isSuccessful()) {
+                return null;
+            }
+
+            return response.body().string();
+        }catch (IOException ioException){
+            ioException.printStackTrace();
+            return null;
+        }
+
+    }
+
     public static JSONObject getSupportedLanguages(){
         Request request = new Request.Builder()
                 .url("https://google-translate20.p.rapidapi.com/languages")

@@ -35,7 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors();
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/api/login","/api/user","/api/registration/addPhoneNumber").permitAll();
+        http.authorizeRequests().antMatchers(
+                "/api/login",
+                "/api/user",
+                "/api/registration/addPhoneNumber",
+                "/imgs/**"
+        ).permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(jwtFilter);
