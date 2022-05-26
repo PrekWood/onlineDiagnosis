@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Greece",
+    "iso_code": "el",
+    "image": "gr.svg"
+  },
+  {
+    "name": "English",
+    "iso_code": "en",
+    "image": "gb.svg"
+  },
+  {
+    "name": "Spanish",
+    "iso_code": "es",
+    "image": "es.svg"
+  },
+  {
+    "name": "German",
+    "iso_code": "de",
+    "image": "de.svg"
+  },
+  {
+    "name": "Chinese",
+    "iso_code": "zh-TW",
+    "image": "cn.svg"
+  },
+  {
+    "name": "Russian",
+    "iso_code": "ru",
+    "image": "ru.svg"
+  }
+]
