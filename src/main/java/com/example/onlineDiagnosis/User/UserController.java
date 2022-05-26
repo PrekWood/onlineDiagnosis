@@ -68,9 +68,9 @@ public class UserController extends ResponseHandler {
             request.getFirstName() == null || request.getFirstName().equals("") ||
             request.getLastName() == null || request.getLastName().equals("")
         ) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body((new HashMap<>()).put("error", "Please fill in all the nesessary fields"));
+            return createErrorResponse("Please fill in all the nesessary fields");
         }
+
 
         // Create new object
         User newUser = new User(
@@ -87,12 +87,10 @@ public class UserController extends ResponseHandler {
         try {
             userService.signUpUser(newUser);
         } catch (EmailAlreadyBeingUsedUserException e) {
-            return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body((new HashMap<>()).put("error", "E-mail already exists"));
+            return createErrorResponse(HttpStatus.CONFLICT, "E-mail already exists");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.present(newUser));
+        return createSuccessResponse(userService.present(newUser));
     }
 
     @CrossOrigin

@@ -1,4 +1,4 @@
-package com.example.onlineDiagnosis.User.requests;
+package com.example.onlineDiagnosis.OTP.requests;
 
 import lombok.*;
 
@@ -10,5 +10,4 @@ import lombok.*;
 @ToString
 public class OtpRequest {
     private String phoneNumber;
-    private Long idCountryCode;
 }

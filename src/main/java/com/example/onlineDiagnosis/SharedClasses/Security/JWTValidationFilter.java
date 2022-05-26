@@ -53,7 +53,6 @@ public class JWTValidationFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request, response);
 
                 }catch(Exception exception){
-                    System.out.println("Authentication error: "+exception.getMessage());
 
                     response.setStatus(FORBIDDEN.value());
                     response.setHeader("error", exception.getMessage());
@@ -64,8 +63,6 @@ public class JWTValidationFilter extends OncePerRequestFilter {
                     new ObjectMapper().writeValue(response.getOutputStream(),errorMessage);
                 }
             }else{
-                System.out.println("no token");
-
                 filterChain.doFilter(request, response);
             }
         }
