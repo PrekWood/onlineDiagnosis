@@ -1,11 +1,16 @@
 package com.example.onlineDiagnosis.Symptoms;
 
+import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
+import com.example.onlineDiagnosis.SharedClasses.ResponseHandler;
 import com.example.onlineDiagnosis.User.User;
 import com.example.onlineDiagnosis.User.UserService;
 import com.example.onlineDiagnosis.User.exceptions.UserNotFoundException;
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +19,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class SymptomsController {
+public class SymptomsController extends ResponseHandler {
     SymptomsService symptomsService;
     private final UserService userService;
 
@@ -40,7 +45,7 @@ public class SymptomsController {
         User u = userService.loadUserFromJwt();
         List<Symptoms> symptoms = u.getSymptomsList();
         if (symptoms.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>().put("Warning","Symptom list is empty"));
-        return ResponseEntity.status(HttpStatus.OK).body(symptoms);
+        return createSuccessResponse(HttpStatus.OK,symptoms);
     }
     @CrossOrigin
     @DeleteMapping("/api/symptoms" )
@@ -53,7 +58,7 @@ public class SymptomsController {
                 return saveUserSymptomsList(u, symptomsList);
             }
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","id not found in the list"));
+        return createErrorResponse("id not found in the list");
     }
 
     @NotNull
@@ -63,9 +68,9 @@ public class SymptomsController {
             userService.updateUser(u);
         } catch (UserNotFoundException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new HashMap<>().put("error", "User Not Found"));
+            return createErrorResponse(HttpStatus.FORBIDDEN, "Failed to update the User");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(symptomsList);
+        return createSuccessResponse(HttpStatus.OK,symptomsList);
     }
 
 }

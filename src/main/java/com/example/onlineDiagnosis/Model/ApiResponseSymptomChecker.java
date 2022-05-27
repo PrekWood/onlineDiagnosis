@@ -77,7 +77,7 @@ public class ApiResponseSymptomChecker {
      *                            and 11 and below is considered as Child (for boy, girl)
      * @return String JsonArray
      */
-    public static JSONArray getSymptomsInBodySubLocations(int idxBodySubLocations, String gender) {
+    public static String getSymptomsInBodySubLocations(int idxBodySubLocations, String gender) {
         if (!gender.equals("man") &&
                 !gender.equals("woman") &&
                 !gender.equals("boy") &&
@@ -94,7 +94,15 @@ public class ApiResponseSymptomChecker {
                 .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
                 .build();
 
-        return getJsonArrayResponse(request);
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            return "fuckme";
+        }
+
+//        return getJsonArrayResponse(request);
     }
 
     /**
@@ -283,7 +291,6 @@ public class ApiResponseSymptomChecker {
             e.printStackTrace();
             return null;
         }
-        System.out.println(newResponse.toString());
         return newResponse;
     }
     static JSONArray getJsonArrayResponse(Request request) {
@@ -291,6 +298,7 @@ public class ApiResponseSymptomChecker {
         try {
             response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                System.out.println();
                 return new JSONArray(response.body().string());
             } else {
                 System.out.println(response.code()+" "+response.message());;

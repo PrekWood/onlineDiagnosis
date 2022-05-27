@@ -1,6 +1,7 @@
 package com.example.onlineDiagnosis.User;
 
 import com.example.onlineDiagnosis.Symptoms.Symptoms;
+import com.example.onlineDiagnosis.User.emun.GENDER;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,6 +30,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private boolean isPhoneValidated;
+
+    private Long year;
+    private GENDER gender;
 
     @OneToMany
     private List<Symptoms> symptomsList;

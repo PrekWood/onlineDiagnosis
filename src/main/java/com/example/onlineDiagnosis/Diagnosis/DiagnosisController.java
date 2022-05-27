@@ -3,10 +3,12 @@ package com.example.onlineDiagnosis.Diagnosis;
 import com.example.onlineDiagnosis.Diagnosis.Requests.DiagnosisRequests;
 import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
 import com.example.onlineDiagnosis.Model.ApiResponseTranslation;
+import com.example.onlineDiagnosis.SharedClasses.ResponseHandler;
 import com.example.onlineDiagnosis.SupportedLanguages.SupportedLanguageService;
 import com.example.onlineDiagnosis.Symptoms.Symptoms;
 import com.example.onlineDiagnosis.Symptoms.SymptomsService;
 import com.example.onlineDiagnosis.User.UserService;
+import com.example.onlineDiagnosis.User.emun.GENDER;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.Nullable;
@@ -22,13 +24,9 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class DiagnosisController {
+public class DiagnosisController extends ResponseHandler {
     SymptomsService symptomsService;
     private final UserService userService;
-    public enum Gender{
-        male, female
-    }
-
     @PostMapping("/api/diagnosis/")
     @CrossOrigin
     public ResponseEntity<?> diagnosis(@RequestBody DiagnosisRequests diagnosisRequests) {
@@ -36,26 +34,23 @@ public class DiagnosisController {
                 diagnosisRequests.getBirthday() == 0 ||
                 diagnosisRequests.getIdGender() == null || diagnosisRequests.getIdGender().equals("")
         ) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body((new HashMap<>()).put("error", "Please fill in all the necessary fields"));
+            return createErrorResponse(HttpStatus.BAD_REQUEST,"Please fill in all the necessary fields");
         }
         if (
-                !diagnosisRequests.getIdGender().equals(Gender.female.name()) &&
-                !diagnosisRequests.getIdGender().equals(Gender.male.name())
+                !diagnosisRequests.getIdGender().equals("female") &&
+                !diagnosisRequests.getIdGender().equals(GENDER.male.toString())
         ){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body((new HashMap<>()).put("error", "Gender must be female or male"));
+            return createErrorResponse(HttpStatus.BAD_REQUEST,"Gender must be female or male");
         }
         ArrayList<Integer> userSymptomsIds = getUserSymptomsIdx();
-        if (userSymptomsIds.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body((new HashMap<>()).put("error", "User must choose at least one Symptom"));
+        if (userSymptomsIds.isEmpty()) return createErrorResponse(HttpStatus.BAD_REQUEST,"User must choose at least one Symptom");
 //        make the Call to the Api
         JSONArray response = ApiResponseSymptomChecker.getDiagnosisWithExtraInfo(
                 diagnosisRequests.getIdGender(),
                 diagnosisRequests.getBirthday(),
                 userSymptomsIds);
-        if (response == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((new HashMap<>()).put("error", "Api error"));
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        if (response == null) return createErrorResponse(HttpStatus.CONFLICT,"Api error");
+        return createSuccessResponse(response);
     }
     @GetMapping("/api/proposed-symptoms/?gender={idGender}&birthday={birthday}&idSymptomsList={idSymptomsList}")
     @CrossOrigin
@@ -63,12 +58,10 @@ public class DiagnosisController {
                                        @PathVariable int birthday,
                                        @PathVariable String idGender) {
         ArrayList<Integer> userSymptomsIds = getUserSymptomsIdx();
-        if (userSymptomsIds.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body((new HashMap<>()).put("error", "User must choose at least one Symptom"));
-
+        if (userSymptomsIds.isEmpty()) return createErrorResponse(HttpStatus.BAD_REQUEST,"User must choose at least one Symptom");
         JSONArray response = ApiResponseSymptomChecker.getDiagnosis(idGender,birthday,idSymptomsList);
-        if (response == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Api error"));
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        if (response == null) return createErrorResponse(HttpStatus.CONFLICT,"Api error");
+        return createSuccessResponse(response);
     }
 
     private ArrayList<Integer> getUserSymptomsIdx() {
@@ -85,6 +78,6 @@ public class DiagnosisController {
     public ResponseEntity<?> specialisationList() {
         JSONArray response = ApiResponseSymptomChecker.getSpecialisationsList();
         if (response == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return createSuccessResponse(response);
     }
 }
