@@ -20,13 +20,43 @@
     "image": "de.svg"
   },
   {
+    "name": "Italian",
+    "iso_code": "it",
+    "image": "it.svg"
+  },
+  {
     "name": "Chinese",
     "iso_code": "zh-TW",
     "image": "cn.svg"
   },
   {
+    "name": "Korean",
+    "iso_code": "ko",
+    "image": "kr.svg"
+  },
+  {
+    "name": "Japanese",
+    "iso_code": "ja",
+    "image": "jp.svg"
+  },
+  {
     "name": "Russian",
     "iso_code": "ru",
     "image": "ru.svg"
+  },
+  {
+    "name": "Swedish",
+    "iso_code": "sv",
+    "image": "se.svg"
+  },
+  {
+    "name": "Ukrainian",
+    "iso_code": "uk",
+    "image": "ua.svg"
+  },
+  {
+    "name": "Zulu",
+    "iso_code": "zu",
+    "image": "zulu.png"
   }
 ]

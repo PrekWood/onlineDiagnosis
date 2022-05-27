@@ -21,7 +21,10 @@ public class BodySubLocationsController {
     @CrossOrigin
     @GetMapping("/api/body-parts/{id}" )
     public ResponseEntity<?> getBodySubLocations(@PathVariable int id) {
-        BodySubLocations bodySubLocations = bodySubLocationsService.findByBodyLocationId(id);
+        System.out.println(id);
+        List<BodySubLocations> bodySubLocations = bodySubLocationsService.findByBodyLocationId(id);
+        System.out.println(bodySubLocations.toString());
+
         if (bodySubLocations == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Body Location id not Found"));
         return ResponseEntity.status(HttpStatus.OK).body(bodySubLocations);
     }
