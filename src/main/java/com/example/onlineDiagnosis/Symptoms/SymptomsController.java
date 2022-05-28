@@ -39,6 +39,7 @@ public class SymptomsController extends ResponseHandler {
         symptomsList.add(symptomsService.getSymptomById(givenSymptom.getId()));
         return saveUserSymptomsList(u, symptomsList);
     }
+
     @CrossOrigin
     @GetMapping("/api/symptoms" )
     public ResponseEntity<?> getSymptoms(){
@@ -47,6 +48,7 @@ public class SymptomsController extends ResponseHandler {
         if (symptoms.isEmpty()) return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>().put("Warning","Symptom list is empty"));
         return createSuccessResponse(HttpStatus.OK,symptoms);
     }
+
     @CrossOrigin
     @DeleteMapping("/api/symptoms" )
     public ResponseEntity<?> deleteSymptom(@RequestBody Symptoms symptoms){

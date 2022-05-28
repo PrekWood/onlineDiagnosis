@@ -66,21 +66,24 @@ public class UserController extends ResponseHandler {
             request.getEmail() == null || request.getEmail().equals("") ||
             request.getPassword() == null || request.getPassword().equals("") ||
             request.getFirstName() == null || request.getFirstName().equals("") ||
-            request.getLastName() == null || request.getLastName().equals("")
+            request.getLastName() == null || request.getLastName().equals("") ||
+            request.getGender() == null || request.getGender().equals("") ||
+            request.getYear() == null || request.getYear().equals("")
         ) {
             return createErrorResponse("Please fill in all the nesessary fields");
         }
 
         // Create new object
-        User newUser = new User(
-            request.getEmail(),
-            request.getPassword(),
-            null,
-            request.getFirstName(),
-            request.getLastName(),
-            UserRole.USER,
-            false
-        );
+        User newUser = new User();
+        newUser.setEmail(request.getEmail());
+        newUser.setPassword(request.getPassword());
+        newUser.setPhoneNumber(null);
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
+        newUser.setRole(UserRole.USER);
+        newUser.setPhoneValidated(false);
+        newUser.setGender(request.getGender());
+        newUser.setYear(request.getYear());
 
         // Try to sign in
         try {

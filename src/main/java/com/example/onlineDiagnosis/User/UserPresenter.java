@@ -19,6 +19,8 @@ public class UserPresenter implements ModelPresenter<User> {
         response.put("firstName",user.getFirstName());
         response.put("lastName",user.getLastName());
         response.put("phoneValidated",user.isPhoneValidated());
+        response.put("year",user.getYear());
+        response.put("gender",user.getGender());
         return response;
     }
 

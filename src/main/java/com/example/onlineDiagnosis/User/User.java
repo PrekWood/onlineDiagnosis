@@ -32,6 +32,7 @@ public class User implements UserDetails {
     private boolean isPhoneValidated;
 
     private Long year;
+
     private GENDER gender;
 
     @OneToMany
