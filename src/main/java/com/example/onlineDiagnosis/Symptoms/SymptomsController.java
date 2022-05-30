@@ -26,18 +26,22 @@ public class SymptomsController extends ResponseHandler {
     @CrossOrigin
     @PostMapping("/api/symptoms" )
     public ResponseEntity<?> addSymptom(@RequestBody Symptoms givenSymptom){
+
         User u = userService.loadUserFromJwt();
         List<Symptoms> symptomsList = u.getSymptomsList();
+
         if (givenSymptom.getId() == 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Id is 0"));
+            return createErrorResponse("Id is 0");
         }
         for (Symptoms s:symptomsList){
             if (s.getId() == givenSymptom.getId()){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HashMap<>().put("error","Id is already in the list"));
+                return createErrorResponse("Id is already in the list");
             }
         }
+
         symptomsList.add(symptomsService.getSymptomById(givenSymptom.getId()));
-        return saveUserSymptomsList(u, symptomsList);
+        saveUserSymptomsList(u, symptomsList);
+        return createSuccessResponse(symptomsList);
     }
 
     @CrossOrigin
