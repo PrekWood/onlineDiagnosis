@@ -78,12 +78,6 @@ public class ApiResponseSymptomChecker {
      * @return String JsonArray
      */
     public static String getSymptomsInBodySubLocations(int idxBodySubLocations, String gender) {
-        if (!gender.equals("man") &&
-                !gender.equals("woman") &&
-                !gender.equals("boy") &&
-                !gender.equals("girl")) {
-            gender = "man";
-        }
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms/"
                         + idxBodySubLocations +
@@ -181,7 +175,7 @@ public class ApiResponseSymptomChecker {
      *                   Example: [234,235,236]
      * @return String JsonArray
      */
-    public static JSONArray getDiagnosis(@NotNull String gender, @NotNull int birthday, @NotNull List<Integer> idSymptoms) {
+    public static String getDiagnosis(@NotNull String gender, @NotNull int birthday, @NotNull List<Integer> idSymptoms) {
         if (!gender.equals("male") &&
             !gender.equals("female")) {
             gender = "male";
@@ -196,8 +190,13 @@ public class ApiResponseSymptomChecker {
                 .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
                 .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
                 .build();
-
-        return getJsonArrayResponse(request);
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -263,24 +262,30 @@ public class ApiResponseSymptomChecker {
      *
      * @return String JsonArray
      */
-    public static JSONArray getSpecialisationsList() {
+    public static String getSpecialisationsList() {
         Request request = new Request.Builder()
                 .url("https://priaid-symptom-checker-v1.p.rapidapi.com/specialisations?language=en-gb")
                 .get()
                 .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
                 .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
                 .build();
+        try {
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }catch (IOException ignore){
 
-        return getJsonArrayResponse(request);
+        }
+        return null;
     }
 
 
-    public static JSONArray getDiagnosisWithExtraInfo(String gender, int birthday, List<Integer> idSymptoms) {
-        JSONArray response = getDiagnosis(gender, birthday, idSymptoms);
+    public static String getDiagnosisWithExtraInfo(String gender, int birthday, List<Integer> idSymptoms) {
+        String response = getDiagnosis(gender, birthday, idSymptoms);
+        JSONArray jsonArrayResponse = new JSONArray(response);
         JSONArray newResponse = new JSONArray();
         try {
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject diagnosis = response.getJSONObject(i);
+            for (int i = 0; i < jsonArrayResponse.length(); i++) {
+                JSONObject diagnosis = jsonArrayResponse.getJSONObject(i);
                 JSONObject issue = diagnosis.getJSONObject("Issue");
                 issue.put("Description",getIssueInfo(issue.getInt("ID")));
                 diagnosis.remove("Specialisation");
@@ -291,17 +296,15 @@ public class ApiResponseSymptomChecker {
             e.printStackTrace();
             return null;
         }
-        return newResponse;
+        return newResponse.toString();
     }
     static JSONArray getJsonArrayResponse(Request request) {
         Response response;
         try {
             response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                System.out.println();
                 return new JSONArray(response.body().string());
             } else {
-                System.out.println(response.code()+" "+response.message());;
                 return null;
             }
         } catch (IOException ioException) {
