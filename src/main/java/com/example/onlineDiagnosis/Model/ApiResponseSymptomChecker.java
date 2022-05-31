@@ -28,7 +28,7 @@ import java.util.List;
 @Component
 public class ApiResponseSymptomChecker {
     private static final OkHttpClient client = new OkHttpClient();
-    public static final String API_SYMPTOM_CHECKER_KEY = "d8455cfac5mshb2e12524fc60827p13bf2fjsna477236d177e";
+    public static final String API_SYMPTOM_CHECKER_KEY = "e97ab023b3msh48db599779468ccp18dd15jsn8a5d633bd715";
     public static final String API_SYMPTOM_CHECKER_HOST = "priaid-symptom-checker-v1.p.rapidapi.com";
 
     /**
