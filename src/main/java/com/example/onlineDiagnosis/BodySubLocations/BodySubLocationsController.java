@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @RestController
 @AllArgsConstructor
 public class BodySubLocationsController extends ResponseHandler {
@@ -23,7 +25,7 @@ public class BodySubLocationsController extends ResponseHandler {
     UserService userService;
     @CrossOrigin
     @GetMapping("/api/body-parts/{id}" )
-    public ResponseEntity<?> getBodySubLocations(@PathVariable int id) {
+    public ResponseEntity<?> getBodySubLocations(@PathVariable int id){
         List<BodySubLocations> bodySubLocations = bodySubLocationsService.findByBodyLocationId(id);
         if (bodySubLocations == null) return createErrorResponse(HttpStatus.BAD_REQUEST,"Body Location id not Found");
         return createSuccessResponse(HttpStatus.OK,bodySubLocations);

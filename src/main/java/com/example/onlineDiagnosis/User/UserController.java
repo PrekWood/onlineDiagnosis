@@ -43,9 +43,9 @@ public class UserController extends ResponseHandler {
             return createErrorResponse(HttpStatus.FORBIDDEN, "You haven't validated your phone number");
         }
 
-        // Return details of loged in user
+        // Return details of logged in user
         if (email == null || email.equals("")) {
-            return createSuccessResponse(HttpStatus.ACCEPTED, userService.present(loggedInUser));
+            return createSuccessResponse(userService.present(loggedInUser));
         }
 
         // Search user
@@ -55,7 +55,7 @@ public class UserController extends ResponseHandler {
         } catch (UsernameNotFoundException e) {
             return createErrorResponse("User not found");
         }
-        return createSuccessResponse(HttpStatus.ACCEPTED, userService.present(userFromSearch));
+        return createSuccessResponse(userService.present(userFromSearch));
     }
 
     @PostMapping("user")

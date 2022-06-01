@@ -28,7 +28,7 @@ import java.util.List;
 @Component
 public class ApiResponseSymptomChecker {
     private static final OkHttpClient client = new OkHttpClient();
-    public static final String API_SYMPTOM_CHECKER_KEY = "e97ab023b3msh48db599779468ccp18dd15jsn8a5d633bd715";
+    public static final String API_SYMPTOM_CHECKER_KEY = "a0c33db5e2msh063577909170af5p1027c6jsnb4124468896d";
     public static final String API_SYMPTOM_CHECKER_HOST = "priaid-symptom-checker-v1.p.rapidapi.com";
 
     /**
@@ -177,7 +177,7 @@ public class ApiResponseSymptomChecker {
      */
     public static String getDiagnosis(@NotNull String gender, @NotNull int birthday, @NotNull List<Integer> idSymptoms) {
         if (!gender.equals("male") &&
-            !gender.equals("female")) {
+                !gender.equals("female")) {
             gender = "male";
         }
         Request request = new Request.Builder()
