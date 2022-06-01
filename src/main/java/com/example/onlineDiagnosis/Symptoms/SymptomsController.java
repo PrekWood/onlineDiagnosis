@@ -47,8 +47,7 @@ public class SymptomsController extends ResponseHandler {
             return createErrorResponse("Symptom could not be found");
         }
         symptomsList.add(symptom);
-        saveUserSymptomsList(u, symptomsList);
-        return createSuccessResponse(symptomsList);
+        return saveUserSymptomsList(u, symptomsList);
     }
 
     @CrossOrigin
@@ -57,7 +56,7 @@ public class SymptomsController extends ResponseHandler {
         User u = userService.loadUserFromJwt();
         List<Symptoms> symptoms = u.getSymptomsList();
         if (symptoms.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>().put("Warning","Symptom list is empty"));
+            return createSuccessResponse(HttpStatus.OK,"Your Symptom List is empty");
         }
         return createSuccessResponse(HttpStatus.OK,symptoms);
     }
@@ -74,6 +73,14 @@ public class SymptomsController extends ResponseHandler {
             }
         }
         return createErrorResponse("id not found in the list");
+    }
+    @CrossOrigin
+    @DeleteMapping("/api/symptoms-all" )
+    public ResponseEntity<?> deleteAllUserSymptoms(){
+        User u = userService.loadUserFromJwt();
+        List<Symptoms> symptomsList = u.getSymptomsList();
+        symptomsList.clear();
+        return saveUserSymptomsList(u, symptomsList);
     }
 
     @NotNull
