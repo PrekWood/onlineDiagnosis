@@ -40,8 +40,11 @@ public class BodySubLocationsController extends ResponseHandler {
         if (loggedInUser == null) {
             return createErrorResponse(HttpStatus.FORBIDDEN, "You are not logged in");
         }
-        GENDER g = loggedInUser.getGender();
-        String response = ApiResponseSymptomChecker.getSymptomsInBodySubLocations((int) id,g.toString());
+
+        String response = ApiResponseSymptomChecker.getSymptomsInBodySubLocations(
+            (int) id,
+            userService.genderToStringMan(loggedInUser.getGender())
+        );
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response);
     }
 }

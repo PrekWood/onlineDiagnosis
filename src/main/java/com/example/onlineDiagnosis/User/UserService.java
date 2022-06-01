@@ -1,5 +1,6 @@
 package com.example.onlineDiagnosis.User;
 
+import com.example.onlineDiagnosis.User.emun.GENDER;
 import com.example.onlineDiagnosis.User.exceptions.EmailAlreadyBeingUsedUserException;
 import com.example.onlineDiagnosis.User.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
@@ -77,5 +78,19 @@ public class UserService implements UserDetailsService {
         return user.get();
     }
 
+    public String genderToStringMan(GENDER g){
+        return switch (g) {
+            case male -> "man";
+            case female -> "woman";
+            default -> "man";
+        };
+    }
+    public String genderToStringMale(GENDER g){
+        return switch (g) {
+            case male -> "male";
+            case female -> "female";
+            default -> "male";
+        };
+    }
 
 }

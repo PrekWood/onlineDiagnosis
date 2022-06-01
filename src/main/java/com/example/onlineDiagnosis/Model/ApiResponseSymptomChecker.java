@@ -1,9 +1,13 @@
 package com.example.onlineDiagnosis.Model;
 
+import com.example.onlineDiagnosis.User.User;
+import com.example.onlineDiagnosis.User.UserService;
+import com.example.onlineDiagnosis.User.emun.GENDER;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -26,6 +30,7 @@ import java.util.List;
  *
  */
 @Component
+@AllArgsConstructor
 public class ApiResponseSymptomChecker {
     private static final OkHttpClient client = new OkHttpClient();
     public static final String API_SYMPTOM_CHECKER_KEY = "a0c33db5e2msh063577909170af5p1027c6jsnb4124468896d";
@@ -78,11 +83,14 @@ public class ApiResponseSymptomChecker {
      * @return String JsonArray
      */
     public static String getSymptomsInBodySubLocations(int idxBodySubLocations, String gender) {
+
         Request request = new Request.Builder()
-                .url("https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms/"
-                        + idxBodySubLocations +
-                        "/" + gender +
-                        "?language=en-gb")
+                .url(
+                    "https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms/"
+                    + idxBodySubLocations +
+                    "/" + gender +
+                    "?language=en-gb"
+                )
                 .get()
                 .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
                 .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)

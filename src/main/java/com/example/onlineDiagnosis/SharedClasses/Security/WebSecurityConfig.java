@@ -39,6 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/api/login",
                 "/api/user",
                 "/api/registration/addPhoneNumber",
+                "/api/translate","/api/translate/",
+                "/api/languages/","/api/languages",
                 "/imgs/**"
         ).permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();

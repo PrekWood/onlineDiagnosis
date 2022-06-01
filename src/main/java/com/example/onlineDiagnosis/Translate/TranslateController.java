@@ -55,12 +55,6 @@ public class TranslateController extends ResponseHandler {
     @GetMapping("api/languages")
     public ResponseEntity<?> getAcceptedLanguages(){
 
-        // Search for user
-        User loggedInUser = userService.loadUserFromJwt();
-        if (loggedInUser == null) {
-            return createErrorResponse(HttpStatus.FORBIDDEN, "You are not loged in");
-        }
-
         // Get languages from src/main/resources/languages.json
         List<HashMap<String, String>> availableLanguages = null;
         try {
