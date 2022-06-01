@@ -1,5 +1,6 @@
 package com.example.onlineDiagnosis.User.requests;
 
+import com.example.onlineDiagnosis.User.emun.GENDER;
 import lombok.*;
 
 @Getter
@@ -11,5 +12,7 @@ import lombok.*;
 public class UserUpdateRequest {
     private String firstName;
     private String lastName;
-    private String phoneNumber;
+    private String email;
+    private Long year;
+    private GENDER gender;
 }

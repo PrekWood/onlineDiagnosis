@@ -30,6 +30,7 @@ public class BodySubLocationsController extends ResponseHandler {
         if (bodySubLocations == null) return createErrorResponse(HttpStatus.BAD_REQUEST,"Body Location id not Found");
         return createSuccessResponse(HttpStatus.OK,bodySubLocations);
     }
+
     @CrossOrigin
     @GetMapping("/api/body-parts/{id}/symptoms" )
     public ResponseEntity<?> getBodySubLocationsSymptoms(

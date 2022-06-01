@@ -110,7 +110,9 @@ public class UserController extends ResponseHandler {
 
         loggedInUser.setFirstName(request.getFirstName());
         loggedInUser.setLastName(request.getLastName());
-        loggedInUser.setPhoneNumber(request.getPhoneNumber());
+        loggedInUser.setEmail(request.getEmail());
+        loggedInUser.setYear(request.getYear());
+        loggedInUser.setGender(request.getGender());
         try {
             userService.updateUser(loggedInUser);
         } catch (UserNotFoundException e) {
