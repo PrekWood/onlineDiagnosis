@@ -93,10 +93,8 @@ public class ApiResponseSymptomChecker {
             response = client.newCall(request).execute();
             return response.body().string();
         } catch (IOException e) {
-            return "fuckme";
+            return e.getMessage();
         }
-
-//        return getJsonArrayResponse(request);
     }
 
     /**

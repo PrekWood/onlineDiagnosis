@@ -35,17 +35,12 @@ public class BodySubLocationsController extends ResponseHandler {
     public ResponseEntity<?> getBodySubLocationsSymptoms(
             @PathVariable long id
     ) {
-
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body("""
-             [{"ID":152,"Name":"Hair loss","HasRedFlag":false,"HealthSymptomLocationIDs":[6,21],"ProfName":"","Synonyms":["Hair thinning","Thinning hair","Diffuse hair loss"]},{"ID":239,"Name":"Bold area among hair on the head","HasRedFlag":false,"HealthSymptomLocationIDs":[6,21],"ProfName":"","Synonyms":["Round patches of hair loss","Spot baldness","Circular hair loss"]},{"ID":245,"Name":"Flaking skin on the head","HasRedFlag":false,"HealthSymptomLocationIDs":[21],"ProfName":"","Synonyms":["Scaling of skin on the head"]},{"ID":247,"Name":"Itching on head","HasRedFlag":false,"HealthSymptomLocationIDs":[21,6],"ProfName":"","Synonyms":["Itching on the head","Itch on head","Itching on head","Pruritus"]},{"ID":269,"Name":"Scalp redness","HasRedFlag":false,"HealthSymptomLocationIDs":[6,21],"ProfName":"","Synonyms":[]}]        
-        """);
-
-//        User loggedInUser = userService.loadUserFromJwt();
-//        if (loggedInUser == null) {
-//            return createErrorResponse(HttpStatus.FORBIDDEN, "You are not logged in");
-//        }
-//        GENDER g = loggedInUser.getGender();
-//        String response = ApiResponseSymptomChecker.getSymptomsInBodySubLocations((int) id,g.toString());
-//        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response);
+        User loggedInUser = userService.loadUserFromJwt();
+        if (loggedInUser == null) {
+            return createErrorResponse(HttpStatus.FORBIDDEN, "You are not logged in");
+        }
+        GENDER g = loggedInUser.getGender();
+        String response = ApiResponseSymptomChecker.getSymptomsInBodySubLocations((int) id,g.toString());
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(response);
     }
 }
