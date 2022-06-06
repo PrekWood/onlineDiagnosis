@@ -1,8 +1,6 @@
 package com.example.onlineDiagnosis.Issues;
 
-import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
 import lombok.AllArgsConstructor;
-import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

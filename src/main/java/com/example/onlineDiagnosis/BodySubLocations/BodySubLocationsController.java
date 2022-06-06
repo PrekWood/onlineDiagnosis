@@ -1,22 +1,16 @@
 package com.example.onlineDiagnosis.BodySubLocations;
 
-import com.example.onlineDiagnosis.BodyLocations.BodyLocation;
-import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
+import com.example.onlineDiagnosis.SharedClasses.ApiResponseSymptomChecker;
 import com.example.onlineDiagnosis.SharedClasses.ResponseHandler;
 import com.example.onlineDiagnosis.User.User;
 import com.example.onlineDiagnosis.User.UserService;
-import com.example.onlineDiagnosis.User.emun.GENDER;
 import lombok.AllArgsConstructor;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @AllArgsConstructor

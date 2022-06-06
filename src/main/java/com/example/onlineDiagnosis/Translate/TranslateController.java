@@ -1,25 +1,18 @@
 package com.example.onlineDiagnosis.Translate;
 
-import ch.qos.logback.core.net.ObjectWriter;
-import com.example.onlineDiagnosis.Model.ApiResponseTranslation;
+import com.example.onlineDiagnosis.SharedClasses.ApiResponseTranslation;
 import com.example.onlineDiagnosis.SharedClasses.ResponseHandler;
 import com.example.onlineDiagnosis.Translate.TranslateRequest.TranslateRequest;
-import com.example.onlineDiagnosis.User.User;
 import com.example.onlineDiagnosis.User.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;

@@ -1,8 +1,5 @@
-package com.example.onlineDiagnosis.Model;
+package com.example.onlineDiagnosis.SharedClasses;
 
-import com.example.onlineDiagnosis.User.User;
-import com.example.onlineDiagnosis.User.UserService;
-import com.example.onlineDiagnosis.User.emun.GENDER;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -33,44 +30,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ApiResponseSymptomChecker {
     private static final OkHttpClient client = new OkHttpClient();
-    public static final String API_SYMPTOM_CHECKER_KEY = "a0c33db5e2msh063577909170af5p1027c6jsnb4124468896d";
+    public static final String API_SYMPTOM_CHECKER_KEY = "e97ab023b3msh48db599779468ccp18dd15jsn8a5d633bd715";
     public static final String API_SYMPTOM_CHECKER_HOST = "priaid-symptom-checker-v1.p.rapidapi.com";
 
-    /**
-     * Get Body Location
-     *
-     * @return String JsonArray
-     */
-    public static JSONArray getBodyLocation() {
-        Request request = new Request.Builder()
-                .url("https://priaid-symptom-checker-v1.p.rapidapi.com/body/locations?language=en-gb")
-                .get()
-                .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
-                .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
-                .build();
-        return getJsonArrayResponse(request);
-    }
 
-    /**
-     * Get SubLocations
-     *
-     * @param idxBodyLocation Body sublocations can be called to receive all the body sub locations from a body location.
-     *                        It returns an array of all body sublocations for the requested location_id.
-     *                        Each element consists of the ID and Name.
-     * @return Json String
-     */
-    public static JSONArray getBodySubLocations(long idxBodyLocation) {
-        Request request = new Request.Builder()
-                .url("https://priaid-symptom-checker-v1.p.rapidapi.com/body/locations/"
-                        + idxBodyLocation +
-                        "?language=en-gb")
-                .get()
-                //host keys
-                .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
-                .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
-                .build();
-        return getJsonArrayResponse(request);
-    }
+
 
     /**
      * Find Symptoms In Body Sub Locations
@@ -103,51 +67,6 @@ public class ApiResponseSymptomChecker {
         } catch (IOException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Get Specific symptom based ID_Symptom
-     * With
-     *
-     * @param idSymptoms Serialized array of selected symptom ids in json format. example symptoms=[234,11]
-     *                   (JSON encoded int[] array)
-     * @return
-     */
-    public static JSONArray getSymptoms(Integer idSymptoms) {
-
-        List<Integer> list = new ArrayList<>();
-        list.add(idSymptoms);
-        Request request = new Request.Builder()
-                .url("https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms?language=en-gb&format=json&" +
-                        "symptoms=" + list)
-                .get()
-                .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
-                .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
-                .build();
-
-        return getJsonArrayResponse(request);
-    }
-
-    /**
-     * Issues can be either called to receive the full list of issues or a subset of issues
-     * (e.g. all issues of a diagnosis).
-     *
-     * @param idIssues JSON encoded int[] array Serialized array of selected issue ids in json format.
-     *                 example issues=[234,235,236]
-     * @return String Json
-     */
-    public static JSONArray getIssues(List<Integer> idIssues) {
-        JSONArray jsonArray = new JSONArray(idIssues);
-
-        Request request = new Request.Builder()
-                .url("https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms?language=en-gb&format=json&" +
-                        "issues=" + jsonArray)
-                .get()
-                .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
-                .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
-                .build();
-
-        return getJsonArrayResponse(request);
     }
 
     /**
@@ -203,35 +122,6 @@ public class ApiResponseSymptomChecker {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * The proposed symptoms can be called to request additional symptoms which
-     * can be related to the given symptoms in order to refine the diagnosis.
-     *
-     * @param gender     Male or female
-     * @param birthday   Year of birth
-     * @param idSymptoms Serialized array of selected symptom ids in json format. example symptoms=[234,235,236]
-     * @return
-     */
-    public static JSONArray getProposedDiagnosis(@NotNull String gender, @NotNull int birthday, List<Integer> idSymptoms) {
-        JSONArray jsonArray = new JSONArray(idSymptoms);
-        if (!gender.equals("male") &&
-                !gender.equals("female")) {
-            gender = "male";
-        }
-        Request request = new Request.Builder()
-                .url("https://priaid-symptom-checker-v1.p.rapidapi.com/symptoms/proposed?" +
-                        "gender=" + gender + "&" +
-                        "year_of_birth=" + birthday + "&" +
-                        "language=en-gb&" +
-                        "symptoms=" + jsonArray)
-                .get()
-                .addHeader("X-RapidAPI-Host", API_SYMPTOM_CHECKER_HOST)
-                .addHeader("X-RapidAPI-Key", API_SYMPTOM_CHECKER_KEY)
-                .build();
-
-        return getJsonArrayResponse(request);
     }
 
     /**

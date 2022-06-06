@@ -1,30 +1,18 @@
 package com.example.onlineDiagnosis.Diagnosis;
 
-import com.example.onlineDiagnosis.Diagnosis.Requests.DiagnosisRequests;
-import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
-import com.example.onlineDiagnosis.Model.ApiResponseTranslation;
+import com.example.onlineDiagnosis.SharedClasses.ApiResponseSymptomChecker;
 import com.example.onlineDiagnosis.SharedClasses.ResponseHandler;
-import com.example.onlineDiagnosis.SupportedLanguages.SupportedLanguageService;
 import com.example.onlineDiagnosis.Symptoms.Symptoms;
 import com.example.onlineDiagnosis.Symptoms.SymptomsService;
 import com.example.onlineDiagnosis.User.User;
 import com.example.onlineDiagnosis.User.UserService;
-import com.example.onlineDiagnosis.User.emun.GENDER;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import org.jetbrains.annotations.Nullable;
-import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Entity;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @AllArgsConstructor

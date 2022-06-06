@@ -1,21 +1,16 @@
 package com.example.onlineDiagnosis.Symptoms;
 
-import com.example.onlineDiagnosis.Model.ApiResponseSymptomChecker;
 import com.example.onlineDiagnosis.SharedClasses.ResponseHandler;
 import com.example.onlineDiagnosis.User.User;
 import com.example.onlineDiagnosis.User.UserService;
 import com.example.onlineDiagnosis.User.exceptions.UserNotFoundException;
-import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.hibernate.ObjectNotFoundException;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
